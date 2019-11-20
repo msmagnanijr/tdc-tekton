@@ -1,0 +1,54 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: kaniko-build-push
+spec:
+  inputs:
+    params:
+    - name: directory
+      description: The directory containing the app, relative to the source repository root
+      default: .
+    - name: cache
+      description: The name of the volume for caching Maven artifacts and base image layers
+      default: empty-dir-volume
+    - name: insecureRegistry
+      default: "false"
+    - name: ARGS
+      description: The OpenShift CLI arguments to run
+      type: array
+      default:
+      - "help"
+    resources:
+    - name: src
+      type: git
+  outputs:
+    resources:
+      - name: builtImage
+        type: image    
+  steps:
+   - name: build-and-push
+     image: gcr.io/cloud-builders/mvn
+     command:
+     - mvn
+     - compile
+     - com.google.cloud.tools:jib-maven-plugin:build
+     - -Duser.home=/builder/home
+     - -Djib.allowInsecureRegistries=$(inputs.params.insecureRegistry)
+     - -Dimage=$(outputs.resources.builtImage.url)
+     workingDir: /workspace/src/$(inputs.params.directory)
+     volumeMounts:
+     - name: $(inputs.params.cache)
+       mountPath: /builder/home/.m2
+       subPath: m2-cache
+     - name: $(inputs.params.cache)
+       mountPath: /builder/home/.cache
+       subPath: jib-cache
+   - name: check-openshift-client
+     image: quay.io/openshift/origin-cli:latest
+     command: ["/usr/bin/oc"]
+     args:
+       - "version"
+       - "$(inputs.params.ARGS)"     
+  volumes:
+  - name: empty-dir-volume
+    emptyDir: {}

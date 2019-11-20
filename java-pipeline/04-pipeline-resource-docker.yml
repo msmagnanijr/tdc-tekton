@@ -1,0 +1,9 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: java-image-res
+spec:
+  type: image
+  params:
+    - name: url
+      value: registry.hub.docker.com/mmagnani/java-app:2.0

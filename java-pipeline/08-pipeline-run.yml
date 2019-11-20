@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+  name: kaniko-run
+spec:
+  pipelineRef:
+    name: kaniko
+  serviceAccount: pipeline
+  resources:
+    - name: src
+      resourceRef:
+        name: git-source
+    - name: java-image
+      resourceRef:
+        name: java-image-res

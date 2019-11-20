@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: kaniko
+spec:
+  resources:
+    - name: src
+      type: git
+    - name: java-image
+      type: image
+  tasks:
+  - name: pipeline-build-push
+    taskRef:
+      name: kaniko-build-push
+    params:
+      - name: directory
+        value: spring-boot-web-application
+    resources:
+      inputs:
+        - name: src
+          resource: src
+      outputs:
+        - name: builtImage
+          resource: java-image
