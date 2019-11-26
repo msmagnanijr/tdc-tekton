@@ -1,0 +1,6 @@
+quarkus-pipeline/target
+.settings
+.vscode/
+quarkus-pipeline/.*
+quarkus-pipeline/src/tekton
+quarkus-pipeline/src/tekton/*
