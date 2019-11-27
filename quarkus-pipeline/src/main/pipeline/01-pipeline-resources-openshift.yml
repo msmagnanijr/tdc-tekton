@@ -6,6 +6,6 @@ spec:
   type: git
   params: 
   - name: url
-    value: https://github.com/burrsutter/blue-green-canary
+    value: https://github.com/msmagnanijr/tdc-devops
   - name: revision
     value: master
