@@ -19,4 +19,4 @@ spec:
   type: image
   params: 
   - name: url
-    value: "image-registry.openshift-image-registry.svc:5000/demo/tdc-app:2.0"
+    value: "image-registry.openshift-image-registry.svc:5000/demo/tdc-app:1.0"
