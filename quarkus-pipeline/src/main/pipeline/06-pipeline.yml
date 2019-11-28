@@ -38,6 +38,24 @@ spec:
       outputs:
         - name: builtImage
           resource: appImage
+   - name: build-java-app
+     taskRef:
+       name: mvn-buildah
+     params:
+      - name: contextDir
+        value: "$(params.contextDir)"
+      - name: mavenMirrorUrl
+        value: "$(params.mavenMirrorUrl)"
+      - name: dockerFile
+        value: src/main/docker/Dockerfile.jvm  
+     resources:
+      inputs:
+        - name: source
+          resource: appSource
+      outputs:
+        - name: builtImage
+          resource: appImage
+
    - name: deploy
      taskRef:
        name: deploy
