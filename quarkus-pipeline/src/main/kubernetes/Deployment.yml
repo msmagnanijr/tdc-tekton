@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: blue
-        image: demo/tdc-app:1.0
+        image: image-registry.openshift-image-registry.svc:5000/demo/tdc-app:1.0
         imagePullPolicy: Always
         ports:
           - containerPort: 8080

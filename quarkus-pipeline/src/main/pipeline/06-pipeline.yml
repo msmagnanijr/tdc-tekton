@@ -21,9 +21,9 @@ spec:
   - name: appImage
     type: image
   tasks: 
-   - name: build-java-app
+   - name: compile-and-test
      taskRef:
-       name: mvn-buildah
+       name: mvn-test
      params:
       - name: contextDir
         value: "$(params.contextDir)"
