@@ -40,7 +40,7 @@ spec:
           resource: appImage
    - name: deploy
      taskRef:
-       name: yq-deploy
+       name: deploy
      runAfter:
       - build-java-app
      resources:

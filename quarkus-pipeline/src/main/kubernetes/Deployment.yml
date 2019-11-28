@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: blue
-        image: demo/tdc-app:latest
+        image: demo/tdc-app:1.0
         imagePullPolicy: Always
         ports:
           - containerPort: 8080

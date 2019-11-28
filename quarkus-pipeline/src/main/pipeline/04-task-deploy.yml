@@ -22,6 +22,6 @@ spec:
     image: quay.io/rhdevelopers/tutorial-tools:0.0.2
     command: ['kubectl']
     args:
-    - rollout 
-    - latest 
-    - dc/blue
+    - apply
+    - -f 
+    - $(inputs.params.kubernetesResourceFile)
