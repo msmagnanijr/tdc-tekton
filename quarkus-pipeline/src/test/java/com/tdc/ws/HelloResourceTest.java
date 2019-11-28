@@ -16,7 +16,7 @@ public class HelloResourceTest {
           .when().get("/api")
           .then()
              .statusCode(200)
-             .body(containsString("Huhu") , containsString("5bbf45"));
+             .body(containsString("Huhu") , containsString("6bbded"));
     }
 
 }
