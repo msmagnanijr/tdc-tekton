@@ -1,15 +1,17 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
-  name: bgc-build-deploy
+  name: tdc-build-deploy
 spec:
   params:
   - name: mavenMirrorUrl
     description: the maven mirror
     default: http://repo1.maven.apache.org/maven2
+
   - name: kubernetesResourceFile
     description: the kubernetes resource file to apply
-    default: /workspace/source/src/main/kubernetes/Deployment.yml
+    default: /workspace/source/quarkus-pipeline/src/main/kubernetes/Deployment.yml
+
   - name: contextDir
     description: the context directory of the Java sources
     default: .
@@ -50,6 +52,7 @@ spec:
      params:
       - name: kubernetesResourceFile
         value: "$(params.kubernetesResourceFile)"
+
       - name: ARGS
         value:
         - "w"

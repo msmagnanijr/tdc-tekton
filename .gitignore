@@ -1,6 +1,8 @@
 quarkus-pipeline/target
 .settings
 .vscode/
+bin/
+java-pipeline/
 quarkus-pipeline/.*
 quarkus-pipeline/src/tekton
 quarkus-pipeline/src/tekton/*

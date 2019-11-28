@@ -38,21 +38,9 @@ spec:
        # the default underprivileged user to be used
        runAsUser: 10001
   steps:
-   - name: ls-build-sources
-     image: fedora
-     command: ['ls', '/workspace/source']
-   - name: echo-dockerfile
-     image: fedora
-     command: ['echo', '$(inputs.params.dockerFile)']
-   - name: cat-dockerfile
-     image: fedora
-     command: ['cat', '/workspace/source/$(inputs.params.dockerFile)']
-   - name: echo-destinationimage    
-     image: fedora
-     command : ['echo', '$(inputs.params.destinationImage)']
    - name: build-sources
      image: quay.io/rhdevelopers/tutorial-tools:0.0.2
-     workingDir: "/workspace/source/$(inputs.params.contextDir)"
+     workingDir: "/workspace/source/quarkus-pipeline/$(inputs.params.contextDir)"
      args:
       - mvn      
       - clean 
@@ -63,10 +51,10 @@ spec:
        value: "$(inputs.params.mavenMirrorUrl)"
    - name: ls-build-target
      image: fedora
-     command: ['ls', '/workspace/source/target']
+     command: ['ls', '/workspace/source/quarkus-pipeline/target']
    - name: build-image
      image: quay.io/buildah/stable
-     workingDir: "/workspace/source/$(inputs.params.contextDir)"
+     workingDir: "/workspace/source/quarkus-pipeline/$(inputs.params.contextDir)"
      command: ['buildah', 'bud', '--tls-verify=false', '--layers','-f', '$(inputs.params.dockerFile)', '-t', '$(inputs.params.destinationImage)', '.']
      volumeMounts:
      - name: varlibc
@@ -78,7 +66,7 @@ spec:
        privileged: true
    - name: build-push
      image: quay.io/buildah/stable
-     workingDir: "/workspace/source/$(inputs.params.contextDir)"
+     workingDir: "/workspace/source/quarkus-pipeline/$(inputs.params.contextDir)"
      command: ["buildah","push", "--tls-verify=false","$(inputs.params.destinationImage)","docker://$(inputs.params.destinationImage)"]
      volumeMounts:
      - name: varlibc

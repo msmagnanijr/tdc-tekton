@@ -2,25 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: blue-green-canary
-  name: blue
+    app: tdc-app
+  name: tdc-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: blue-green-canary
+      app: tdc-app
   template:
     metadata:
       labels:
-        app: blue-green-canary
-        group: bgc
-        version: blue
-      annotations:
-        sidecar.istio.io/inject: "true"        
+        app: tdc-app
     spec:
       containers:
       - name: blue
-        image: docker.io/bandrade/tdc-tekton:latest
+        image: demo/tdc-app:latest
         imagePullPolicy: Always
         ports:
           - containerPort: 8080

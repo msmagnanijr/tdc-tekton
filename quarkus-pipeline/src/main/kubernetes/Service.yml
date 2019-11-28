@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: blue-green-canary
+  name: tdc-app
   labels:
-    app: blue-green-canary
+    app: tdc-app
 spec:
   ports:
   - name: http
     port: 8080
   selector:
-    app: blue-green-canary
+    app: tdc-app
