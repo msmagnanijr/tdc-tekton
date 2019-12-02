@@ -9,7 +9,7 @@ This is an example to demonstrate how an integration of [Tekton VSCode Plugin](h
 
 - Follow up the `PipelineRun` progress at `Pipeline View` in Developer Mode at `Openshift 4.2+`:
 
-![](/home/bandrade/tdc/tdc-tekton/images/intro2.gif)
+![](images/intro2.gif)
 
 - Let the microservice dependencies be automatically created and deployed by it  own pipeline. The application is created using Quarkus by [Burr Sutter](https://github.com/burrsutter) and can be found at https://github.com/burrsutter/blue-green-canary
 
